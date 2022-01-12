@@ -1,6 +1,6 @@
 <template>
    <form @submit.prevent="submitData">
-        <input type="text" placeholder="Enter task title..."  v-model="eneteredTitle">
+        <input type="text" placeholder="Enter task title..."  v-model="eneteredTitle" required>
         <button>ADD</button>
    </form>
 
