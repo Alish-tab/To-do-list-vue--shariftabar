@@ -10,8 +10,10 @@
         v-for="task in tasks"
         :key="task.title"
         :item="task"
-        @edit-status="editTask"
+        @edit-status="editTaskStatus"
         @edit-title="editTitle"
+        @delete-status="deleteTaskStatus"
+        @delete-decision="deleteTask"
       ></todo-list>
     </ul>
   </section>
@@ -49,7 +51,7 @@ export default {
       console.log(this.tasks);
     },
 
-    editTask(taskId) {
+    editTaskStatus(taskId) {
         const identifiedTask = this.tasks.find(task => task.id === taskId)
          identifiedTask.editStatus = !identifiedTask.editStatus;
     },
@@ -57,7 +59,23 @@ export default {
     editTitle(taskId , newTitle) {
         const identifiedTask = this.tasks.find(task => task.id === taskId)
         identifiedTask.title = newTitle
+    },
+
+    deleteTaskStatus(taskId) {
+      const identifiedTask = this.tasks.find(task => task.id === taskId)
+         identifiedTask.deleteStatus = !identifiedTask.deleteStatus;
+    },
+
+    deleteTask(taskId , decision) {
+      if(decision === 'cancel'){
+        this.deleteTaskStatus(taskId)
+      }else if(decision === 'confirm'){
+        this.tasks = this.tasks.filter(task => task.id !== taskId)
+        
+      }
+
     }
+
   },
 };
 </script>
