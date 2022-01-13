@@ -36,7 +36,7 @@
     }
 
     input{
-        width: 95%;
+        width: 96%;
         padding: 1.5rem;
         border: none;
     }

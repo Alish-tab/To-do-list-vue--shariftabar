@@ -9,11 +9,13 @@
       <todo-list
         v-for="task in tasks"
         :key="task.title"
+        :check="task.checkedStatus"
         :item="task"
         @edit-status="editTaskStatus"
         @edit-title="editTitle"
         @delete-status="deleteTaskStatus"
         @delete-decision="deleteTask"
+        @checked-status="checkedTask"
       ></todo-list>
     </ul>
   </section>
@@ -44,11 +46,10 @@ export default {
         title: enteredtitle,
         editStatus: false,
         deleteStatus: false,
-        checked: false,
+        checkedStatus: 'todo',
       };
 
       this.tasks.push(newTask);
-      console.log(this.tasks);
     },
 
     editTaskStatus(taskId) {
@@ -74,6 +75,19 @@ export default {
         
       }
 
+    },
+
+    checkedTask(taskId){
+      const identifiedTask = this.tasks.find(task => task.id === taskId)
+         
+
+         if(identifiedTask.checkedStatus === 'todo'){
+           identifiedTask.checkedStatus = 'in-progress'
+         }else if(identifiedTask.checkedStatus === 'in-progress'){
+           identifiedTask.checkedStatus = 'done'
+         }else if(identifiedTask.checkedStatus === 'done'){
+           identifiedTask.checkedStatus = 'todo'
+         }
     }
 
   },
